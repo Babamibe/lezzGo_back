@@ -1,0 +1,16 @@
+package fr.dawan.lezzGo.entities;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="") //à voir quel nom l'on donne dans la BDD
+public class Participate {
+	
+	private User user;
+	private Holidays_project project;
+
+	public Participate() {
+	}
+
+}

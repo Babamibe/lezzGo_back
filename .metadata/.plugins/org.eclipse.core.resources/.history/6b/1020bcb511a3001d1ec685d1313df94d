@@ -1,0 +1,6 @@
+package fr.dawan.lezzGo.enums;
+
+public enum Destination {
+	MOUNTAIN, BEACH, COUNTRYSIDE, CITY;
+
+}

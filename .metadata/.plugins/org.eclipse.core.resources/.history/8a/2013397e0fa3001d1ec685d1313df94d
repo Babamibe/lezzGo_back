@@ -1,0 +1,24 @@
+package fr.dawan.lezzGo.entities;
+
+import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="") //à voir quel nom l'on donne dans la BDD
+public class Participate {
+	
+	private User user;
+	private Holidays_project project;
+	private int budget_by_user;
+	private List<Availability> availability; //où vont les dispos individuelles ?
+	private ArrayList<Blob> profile_picture_list; 
+
+	public Participate() {
+		
+	}
+
+}

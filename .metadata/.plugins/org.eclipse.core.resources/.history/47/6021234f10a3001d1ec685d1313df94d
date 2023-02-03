@@ -1,0 +1,71 @@
+package fr.dawan.lezzGo.entities;
+
+import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="") //à voir quel nom l'on donne dans la BDD
+public class Participate {
+	
+	@ManyToOne
+	private User user;
+	
+	@ManyToOne
+	private Holidays_project project;
+	
+	private int budget_by_user;
+	private List<Availability> availability_list; //où vont les dispos individuelles ?
+	private ArrayList<Blob> profile_picture_list; 
+
+	public Participate() {
+		
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Holidays_project getProject() {
+		return project;
+	}
+
+	public void setProject(Holidays_project project) {
+		this.project = project;
+	}
+
+	public int getBudget_by_user() {
+		return budget_by_user;
+	}
+
+	public void setBudget_by_user(int budget_by_user) {
+		this.budget_by_user = budget_by_user;
+	}
+
+	public List<Availability> getAvailability_list() {
+		return availability_list;
+	}
+
+	public void setAvailability_list(List<Availability> availability_list) {
+		this.availability_list = availability_list;
+	}
+
+	public ArrayList<Blob> getProfile_picture_list() {
+		return profile_picture_list;
+	}
+
+	public void setProfile_picture_list(ArrayList<Blob> profile_picture_list) {
+		this.profile_picture_list = profile_picture_list;
+	}
+	
+	
+
+}

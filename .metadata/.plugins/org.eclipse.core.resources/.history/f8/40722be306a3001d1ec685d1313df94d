@@ -1,0 +1,11 @@
+package fr.dawan.lezzGo.entities;
+
+import java.io.Serializable;
+
+public class holidays_project implements Serializable {
+
+	public holidays_project() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,11 @@
+package fr.dawan.lezzGo.entities;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
+
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

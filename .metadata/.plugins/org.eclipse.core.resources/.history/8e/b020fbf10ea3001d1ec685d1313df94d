@@ -1,0 +1,9 @@
+package fr.dawan.lezzGo.entities;
+
+public class Participate {
+
+	public Participate() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

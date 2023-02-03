@@ -1,0 +1,11 @@
+package fr.dawan.lezzGo.pk;
+
+import jakarta.persistence.Embeddable;
+
+@Embeddable
+public class Participate_PK {
+	
+	private Long user_id;
+	private Long holidays_id;
+
+}
