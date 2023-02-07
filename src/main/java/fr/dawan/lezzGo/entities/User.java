@@ -2,7 +2,10 @@ package fr.dawan.lezzGo.entities;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,13 +32,14 @@ public class User implements Serializable {
 	private long user_id;
 	
 	@Column(length = 50,nullable = false)
-	private String firstName;
+	private String firstName; //perso
 	
 	@Column(length = 50,nullable = false)
-	private String lastName;
+	private String lastName; //perso
 	
+	@JsonProperty(value = "name")
 	@Column(length = 50,nullable = false)
-	private String username;
+	private String username; //public
 	
 	@Column(length = 225,nullable = false)
 	private String email_address;
@@ -47,6 +51,8 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy="participate")
 	private List<Participate> participate;
+	
+	private List<Date> dateList;
 	
 		
 	//constructeur simple
@@ -66,7 +72,15 @@ public class User implements Serializable {
 		this.password = password;
 		this.profile_picture = profile_picture;
 	}
-
+	
+	public List<Date> getUser_date() {
+		return dateList;
+	}
+	
+	public void setUser_date (List<Date> lst) {
+		this.dateList = lst;
+	}
+	
 	public long getUser_id() {
 		return user_id;
 	}

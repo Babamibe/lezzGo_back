@@ -1,79 +1,94 @@
 package fr.dawan.lezzGo.dto;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import fr.dawan.lezzGo.entities.User;
 
 public class TestComparaisonDate {
 	
 	
 	//obtenir une liste de date entre une date de début et une date de fin
 	
+	private List <User> userList;
 	
-	//Date convertie en string
-	public static String listDate (Date dateDebut, Date dateFin) {
-				
-		//instanciation d'un gregorian calendar
-		GregorianCalendar calendar = new GregorianCalendar();
-		
-		//initialisation de la date de départ
-		calendar.setTime(dateDebut);
-		String listDate = "";
-		
-		//ajout de dates dans une boucle while avant la date de fin en paramètre
-		while (calendar.before(dateFin)) {
-			listDate = listDate + calendar.getTime() + ";";
-			calendar.add(GregorianCalendar.DATE, 1);
-		}
-		System.out.println(listDate);
-		return listDate;
-		
-		
-		
-	}
+	private static User user;
+	
+	
 	
 	//A TESTER
-	//Liste de date
-	public static List <Date> lstDate (Date dateDebut, Date dateFin) {
+	//calcul de dates selon une date de début et de fin passées en paramètre par le user
+	public static void calculDurée (Date dateDebut, Date dateFin) {
 		
-		SimpleDateFormat df = new SimpleDateFormat("dd, mm, yyy");
-
-		GregorianCalendar calendar = new GregorianCalendar();
+		GregorianCalendar cal = new GregorianCalendar();
 		
-		calendar.setTime(dateDebut);
-		List<Date> lstDate = new ArrayList<>();
 		
-		while (calendar.before(dateFin)) {
-			lstDate.add(calendar.getTime());
-			calendar.add(GregorianCalendar.DATE, 1);
+		cal.setTime(dateDebut);
+		
+		//la liste de dates par utilisateurs
+		List <Date> duration = new ArrayList<>();
+		
+		//tant que la boucle calendrier n'est pas arrivé à la date de fin en paramètre
+		while (cal.before(dateFin)) {
+			//on ajoute une date
+			duration.add(cal.getTime());
+			cal.add(GregorianCalendar.DATE, 1);
+			
 		}
 		
-		System.out.println(df.format(lstDate));
-		return lstDate;
-		
+		System.out.println(duration);
 		
 	}
-	
-	/*CREATION D UNE 3EME LISTE CONTENANT LES ELEMENTS COMMUNS DES 2 AUTRES LISTES
-	 * 
-	 * lst 1
-	 * lst 2
-	 * 
-	 * for (int i = 0; l1.size(); i++) {
-	 * 	if (l1.get(i).equals(l2.get(i))) {
-	 * 	l3.add(i)}
-	 * }
-	 *}
-	 *
-	 * sysout(l3)
-	 * 
-	 * */
-
+		
+		
+	public static void trierDate (List <User> friends) {
+		//liste de dates communes
+		List<Date> commonLst = new ArrayList<>();
+		
+		//1ère boucle dans la liste des utilisateurs du projet
+		for (int i = 0; i < friends.size(); i++) {
+			//2ème boucle sur la liste des dates de chaque utilisateur
+			for (int j = 0; j < user.getUser_date().size(); j++) {
+				//si la liste n'est pas vide
+				if(user.getUser_date() != null) {
+					//et si la date(j) est égale à la date(j)
+					if (user.getUser_date().get(j).equals(user.getUser_date().get(j))) {
+						//alors la date s'ajoute à la liste des dates communes
+						commonLst.add(user.getUser_date().get(j));
+						
+						//l'on supprimer les doublons de la liste communes
+						commonLst.stream().distinct().collect(Collectors.toList());
+					}
+					
+					System.out.println(commonLst);
+				}
+			}
+		}
+		//si le nombre d'éléments de la liste commune est égal au nombre de personne dans le projet
+		if(commonLst.size() == friends.size()) {
+			//alors on affiche la liste de dates
+			System.out.println("Voici les dates communes " + commonLst);
+		} else {
+			System.out.println("il n'y a pas de dates communes");
+		}
 	}
 	
+	
+	
+	
+}
 
+	
+	
+		
+		
+
+	
+	
 
 	            
 	
