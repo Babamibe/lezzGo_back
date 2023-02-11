@@ -1,7 +1,6 @@
 package fr.dawan.lezzGo.entities;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -9,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -17,119 +19,134 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "user" )
+@Table(name = "users" )
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	//paramètres users
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long user_id;
+	@Column(name = "user_id")
+	private long id;
 	
-	@Column(length = 50,nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "avatar_id")
+	private Avatar avatar;
+	
+	@Column(nullable = true, name = "first_name")
 	private String firstName;
 	
-	@Column(length = 50,nullable = false)
+	@Column(nullable = true, name = "last_name")
 	private String lastName;
 	
-	@Column(length = 50,nullable = false)
-	private String username;
+	@Column(nullable = false, name = "username", updatable = false)
+	private String userName;
 	
-	@Column(length = 225,nullable = false)
-	private String email_address;
-	
-	@Column(length = 30,nullable = false)
+	@Column(nullable = false)
 	private String password;
 	
-	private Blob profile_picture;
+	@OneToMany(mappedBy = "user")
+	private List<UserProject> participate;
 	
-	@OneToMany(mappedBy="participate")
-	private List<Participate> participate;
+	@ManyToMany
+	private List<User> friends;
+
+    public User() {
+    }
+    
+    
+
+    public User(long id, Avatar avatar, String firstName, String lastName, String userName, String password,
+            List<UserProject> participate, List<User> friends) {
+        this.id = id;
+        this.avatar = avatar;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.participate = participate;
+        this.friends = friends;
+    }
+
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<UserProject> getParticipate() {
+        return participate;
+    }
+
+    public void setParticipate(List<UserProject> participate) {
+        this.participate = participate;
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", avatar=" + avatar + ", firstName=" + firstName + ", lastName=" + lastName
+                + ", userName=" + userName + ", password=" + password + ", participate=" + participate + ", friends="
+                + friends + "]";
+    }
 	
-		
-	//constructeur simple
-	public User() {
-			
-	}
-
-	//constructeur avec paramètres
-	public User(long user_id, String firstName, String lastName, String username, String email_address, String password,
-			Blob profile_picture) {
-		super();
-		this.user_id = user_id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.email_address = email_address;
-		this.password = password;
-		this.profile_picture = profile_picture;
-	}
-
-	public long getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getEmail_address() {
-		return email_address;
-	}
-
-	public void setEmail_address(String email_address) {
-		this.email_address = email_address;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Blob getProfile_picture() {
-		return profile_picture;
-	}
-
-	public void setProfile_picture(Blob profile_picture) {
-		this.profile_picture = profile_picture;
-	}
-
 	
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
-				+ username + ", email_address=" + email_address + ", password=" + password + ", profile_picture="
-				+ profile_picture + "]";
-	}
+	
+	
+	
 	
 	
 	
