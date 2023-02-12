@@ -43,6 +43,9 @@ public class User implements Serializable {
 	private String userName;
 	
 	@Column(nullable = false)
+	private String email;
+	
+	@Column(nullable = false)
 	private String password;
 	
 	@OneToMany(mappedBy = "user")
@@ -56,13 +59,14 @@ public class User implements Serializable {
     
     
 
-    public User(long id, Avatar avatar, String firstName, String lastName, String userName, String password,
+    public User(long id, Avatar avatar, String firstName, String lastName, String userName, String email, String password,
             List<UserProject> participate, List<User> friends) {
         this.id = id;
         this.avatar = avatar;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
+        this.email = email;
         this.password = password;
         this.participate = participate;
         this.friends = friends;
@@ -109,6 +113,16 @@ public class User implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
 
     public String getPassword() {
         return password;
@@ -139,10 +153,12 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User [id=" + id + ", avatar=" + avatar + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", userName=" + userName + ", password=" + password + ", participate=" + participate + ", friends="
-                + friends + "]";
+                + ", userName=" + userName + ", email=" + email + ", password=" + password + ", participate="
+                + participate + ", friends=" + friends + "]";
     }
-	
+
+
+
 	
 	
 	
